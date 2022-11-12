@@ -82,9 +82,7 @@
 .ml1{
     margin-left: -10px ;
 }
-/* .mMin{
-    margin-left: -12px ;
-} */
+
 .customColChat{
     height: 80vh;
     /* overflow-y: scroll; */
@@ -118,4 +116,51 @@
     margin-top: -200px !important;
     width: 200px;
     z-index: 20;
+}
+
+@media screen and (max-width: 768px) {
+    .displayHidden{
+        display: none;
+    }
+}
+
+.bgGrapeSetting{
+    background-color: #7E98DF !important;
+    z-index: 10;
+}
+
+.flexSide{
+    flex: 1 1 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .custImgChat{
+        width: 75px;
+        height: 75px;
+        margin-top: 10px;
+    }
+}
+
+.customCollapsePlus{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+/* .swiperChat{
+
+} */
+.swiperChat .swiper-slide {
+    width: 100%;
+}
+.swiperChat .swiper-slide:nth-child(2n) {
+    width: 60%;
+}
+
+/* .setWidth{
+
+} */
+.maxWidth{
+    width: 90%;
 }

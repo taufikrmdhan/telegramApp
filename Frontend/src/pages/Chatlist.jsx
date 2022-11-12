@@ -10,7 +10,7 @@ const Index = () => {
       <div className="container-fluid">
         <div className="row">
           <List/>
-          <div className="col-md-9 customSplash bg-light">
+          <div className="col-md-9 customSplash bg-light displayHidden">
             <h6 className="custSelectCenter">
               Please select a chat to start messaging
             </h6>

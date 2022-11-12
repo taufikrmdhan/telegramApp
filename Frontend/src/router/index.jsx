@@ -8,6 +8,7 @@ import Splash from "../pages/Splashscreen";
 import Profile from "../pages/Profile";
 import Chat from "../pages/Chatlist";
 import Message from "../pages/Message";
+import Contact from "../pages/Contactinfo";
 // import Chat from "../pages/Chat";
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/message" element={<Message />} />
+        <Route path="/contact" element={<Contact />} />
         {/* <Route path="/chat" element={<Chat />} /> */}
       </Routes>
     </BrowserRouter>

@@ -1,38 +1,36 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Index = () => {
+  const hiddenFileInput = useRef(null);
+  const handleClick = (event) => {
+    console.log(event);
+    hiddenFileInput.current.click();
+  };
+  const handleChange = (event) => {
+    const fileUploaded = event.target.files[0];
+    console.log(fileUploaded);
+    // setImage(fileUploaded);
+  };
   return (
     <>
       <div className="col-md-9 bg-white">
         {/* <div className="col-md-12 px-4 bg-white"> */}
-        <div className="row bg-white px-5 pt-3">
-          <div className="col-md-6">
-            <div className="row">
-              <div className="col-md-2">
-                <img
-                  src={require("../assets/image/profile.png")}
-                  alt="profile"
-                  className="img-fluid rounded-4"
-                  width={50}
-                  height={50}
-                />
-              </div>
-              <div className="col-md-10 ml1">
-                <div className="row">
-                  <div className="col-md-12">
-                    <h6>Mother</h6>
-                  </div>
-                  <div className="col-md-12 m3">
-                    <p className="grape">Online</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div className="d-flex flex-row align-items-center mt-3 px-3 pb-2" style={{gap:"10px"}}>
+          <div>
+            <img
+              src={require("../assets/image/profile.png")}
+              alt="profile"
+              className="img-fluid rounded-4"
+              width={50}
+              height={50}
+            />
           </div>
-          <div className="col-md-6 text-end pt-2">
-            <Link
-              className="btn"
+          <div className="flexSide">
+            <div className="d-flex flex-row">
+              <h6 className="flexSide">Mother</h6>
+              <Link
+              className="btn align-self-center"
               data-bs-toggle="collapse"
               to="#collapseExample2"
               role="button"
@@ -42,13 +40,16 @@ const Index = () => {
               <img
                 src={require("../assets/image/titik.png")}
                 alt="profile"
-                className="img-fluid rounded-4"
+                className="img-fluid rounded-4 align-self-center"
                 width={20}
                 height={20}
               />
             </Link>
-          </div>
-          <div className="collapse position-relative" id="collapseExample2">
+            </div>
+            <div className="d-flex flex-row">
+              <small className="text-muted flexSide" style={{marginTop:"-15px"}}>online</small>
+            </div>
+            <div className="collapse position-relative" id="collapseExample2">
             <div className="bgGrapeChat rounded-5 p-3 position-absolute top-0 end-0">
               <div className="col-md-12 my-3">
                 <i className="fa fa-phone text-white"> Call</i>
@@ -64,16 +65,17 @@ const Index = () => {
               </div>
             </div>
           </div>
+          </div>
         </div>
         <div className="col-md-12 customColChat bg-light">
           <div className="row">
             <div className="col-md-8">
-              <div className="row mt-4">
+              <div className="row mt-4 maxWidth">
                 <div className="col-md-2 position-relative">
                   <img
                     src={require("../assets/image/profile.png")}
                     alt="profile"
-                    className="img-fluid rounded-4 position-absolute end-0 translate-end customChatLeft"
+                    className="img-fluid rounded-4 position-absolute end-0 translate-end customChatLeft displayHidden"
                     width={50}
                     height={50}
                   />
@@ -104,7 +106,7 @@ const Index = () => {
                   <img
                     src={require("../assets/image/profile1.png")}
                     alt="profile"
-                    className="img-fluid rounded-4 position-absolute  translate-end customChatLeft"
+                    className="img-fluid rounded-4 position-absolute  translate-end customChatLeft displayHidden"
                     width={50}
                     height={50}
                   />
@@ -154,13 +156,24 @@ const Index = () => {
           >
             <i className="fa fa-smile-o grape"></i>
           </button>
-          <button
-            className="btn btn-outline-secondary bg-light border-0"
-            type="button"
-            id="button-addon2"
-          >
-            <i className="fa fa-upload grape"></i>
-          </button>
+          <div>
+            <button
+              className="btn btn-outline-secondary bg-light border-0"
+              type="button"
+              id="button-addon2"
+              onClick={handleClick}
+            >
+              <i className="fa fa-upload grape"></i>
+            </button>
+            <input
+              type="file"
+              ref={hiddenFileInput}
+              id="formFile"
+              name="image"
+              onChange={(e) => handleChange(e)}
+              style={{ display: "none" }}
+            />
+          </div>
           <button
             className="btn btn-outline-secondary bg-light border-0"
             type="button"
@@ -169,6 +182,7 @@ const Index = () => {
             <i className="fa fa-paper-plane grape"></i>
           </button>
         </div>
+        
       </div>
     </>
   );
