@@ -1,35 +1,35 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
-  // const navigate = useNavigate();
-  // const [form, setForm] = useState({
-  //   username: "",
-  //   password: "",
-  // });
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(`http://localhost:3002/login`, form)
-  //     .then((res) => {
-  //       console.log(res.data)
-  //       const result = res.data;
-  //       localStorage.setItem("token", result.data.token);
-  //       localStorage.setItem("user", JSON.stringify(result.data));
-  //       return navigate("/chat");
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/login`, form)
+      .then((res) => {
+        // console.log(res.data);
+        localStorage.setItem("token", res.data.token.token);
+        localStorage.setItem("user", JSON.stringify(res.data.token.data));
+        alert("Login Success");
+        navigate("/chat");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <div>
       <div className="customSplash bg-light">
         <div className="bg-white loginCenter rounded-4">
-          <form action="" className="customForm p-5">
+          <form action="" className="customForm p-5" onSubmit={(e)=>onSubmit(e)}>
             <h4 className="grape text-center mb-4">Login</h4>
             <small>Hi, Welcome back!</small>
             <div className="form-group my-3">
@@ -42,7 +42,8 @@ const Index = () => {
                 id="email"
                 name="email"
                 placeholder="Masukkan email"
-                // value={form.username}
+                onChange={(e) => setForm({...form, email: e.target.value})}
+                // value={form.email}
                 // onChange={(e) => setForm({ ...form, username: e.target.value })}
               />
             </div>
@@ -56,6 +57,7 @@ const Index = () => {
                 id="password"
                 name="password"
                 placeholder="Masukkan password"
+                onChange={(e) => setForm({...form, password: e.target.value})}
                 // value={form.password}
                 // onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
@@ -93,7 +95,7 @@ const Index = () => {
             <div className="text-center">
                 <p className="text-muted ">
                   Don't have a account?{" "}
-                  <Link className='aDiv'to="/">
+                  <Link className='aDiv'to="/register">
                     Sign Up
                   </Link>
                 </p>

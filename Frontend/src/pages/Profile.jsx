@@ -88,12 +88,13 @@ const Index = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-1">
+              {/* <div className="col-md-1">
                 <i className="fa fa-laptop"></i>
-              </div>
-              <div className="col-md-10 text-start">
-                <p>Devices</p>
-              </div>
+              </div> */}
+              <Link
+              to="/update"
+              >
+              <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil"></i> Edit profile</button></Link>
             </div>
           </div>
           <Chat/>

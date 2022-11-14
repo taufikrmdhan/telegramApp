@@ -1,12 +1,47 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log(form);
+    if (form.username === "" || form.email === "" || form.password === "") {
+      alert("Please fill all the fields");
+    }
+    else {
+      const body = {
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      }
+      axios
+      .post(`${process.env.REACT_APP_BACKEND_URL}/register`, body)
+      .then((res) => {
+        console.log(res);
+        if (res.data.status === "success") {
+          alert("Register Success");
+          navigate("/");
+        }
+        else {
+          alert("Register Failed");
+        }
+      })
+    }
+  }
   return (
     <div>
     <div className="customSplash bg-light">
       <div className="bg-white loginCenter rounded-4">
-        <form action="" className="customForm p-5">
+        <form action="" className="customForm p-5" onSubmit={(e)=>onSubmitHandler(e)}>
           <h4 className="grape text-center mt-3 mb-4">Register</h4>
           <small>Let’s create your account!</small>
           <div className="form-group my-3">
@@ -17,8 +52,9 @@ const Index = () => {
               type="text"
               className="form-control border-top-0 border-end-0 border-start-0"
               id="name"
-              name="name"
+              name="username"
               placeholder="Masukkan nama"
+              onChange={(e) => setForm({...form, username: e.target.value})}
             />
             
           </div>
@@ -32,6 +68,7 @@ const Index = () => {
               id="email"
               name="email"
               placeholder="Masukkan email"
+              onChange={(e) => setForm({...form, email: e.target.value})}
               // value={form.username}
               // onChange={(e) => setForm({ ...form, username: e.target.value })}
             />
@@ -47,6 +84,7 @@ const Index = () => {
               id="password"
               name="password"
               placeholder="Masukkan password"
+              onChange={(e) => setForm({...form, password: e.target.value})}
               // value={form.password}
               // onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
@@ -78,7 +116,7 @@ const Index = () => {
             </div>
           </div>
           <div className="text-center">
-            <Link className="btn btnGrapeOutline rounded-pill my-3" to="/register">
+            <Link className="btn btnGrapeOutline rounded-pill my-3" to="/">
               <i className="fa fa-google"> Google</i>
             </Link>
           </div>

@@ -9,6 +9,7 @@ import Profile from "../pages/Profile";
 import Chat from "../pages/Chatlist";
 import Message from "../pages/Message";
 import Contact from "../pages/Contactinfo";
+import Update from "../pages/updateProfile";
 // import Chat from "../pages/Chat";
 
 const Router = () => {
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/chat" element={<Chat />} />
         <Route path="/message" element={<Message />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/update" element={<Update />} />
         {/* <Route path="/chat" element={<Chat />} /> */}
       </Routes>
     </BrowserRouter>

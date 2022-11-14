@@ -8,7 +8,7 @@ const Index = () => {
     {
       id: 1,
       name: "John Doe",
-      message: "lorem ipsum doleum",
+      message: "Lorem ipsum dolddddffffffffffffffffffffffffffffffffffffmana dandbahdavdghabavjahsahnsajmsasjahsajhs",
       time: "10:00 AM",
       number: 1,
     },
@@ -161,7 +161,7 @@ const Index = () => {
                         <small className="text-muted">{item.time}</small>
                       </div>
                       <div className="d-flex flex-row">
-                        <small className="text-muted flexSide">
+                        <small className="text-muted flexSide textChat">
                           {item.message}
                         </small>
                         {item.number ? (

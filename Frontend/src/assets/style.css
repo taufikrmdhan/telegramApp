@@ -99,6 +99,14 @@
     margin-top: 400px;
 }
 
+.textChat{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 200px;
+
+}
+
 .bgGrapeChat{
     background-color: #7E98DF !important;
     width: 20%;
