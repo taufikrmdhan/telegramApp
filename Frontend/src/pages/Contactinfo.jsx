@@ -23,7 +23,7 @@ const Index = () => {
               </div>
               <div className="col-md-1">
                 <Link
-                  class="btn"
+                  className="btn"
                   data-bs-toggle="collapse"
                   to="#collapseExample"
                   role="button"

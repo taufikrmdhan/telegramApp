@@ -1,15 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Chat from "../Component/chat";
-// import axios from "axios";
+import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const [user, setUser] = useState({});
+
+  const data = JSON.parse(localStorage.getItem("user"));
+  const id_user = data.id_user;
+  // console.log(id_user);
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/user/list/${id_user}`)
+      .then((res) => {
+        // console.log(res.data.data);
+        setUser(res.data.data);
+        // setImage(res.data.data.image);
+      })
+      .catch((err) => {
+        console.log("error get data");
+        // console.log(err);
+      });
+  }, []);
   return (
     <div>
       <div className="containerProfile">
         <div className="row">
-          <div className="col-md-3 bg-white py-4 px-5">
+          {
+            user.length > 0 ? (
+              user.map((item) => {
+                return (
+                  <div className="col-md-3 bg-white py-4 px-5">
             <div className="row mt-2">
               <div className="col-md-1 text-start ml1">
                 <i className="fa fa-angle-left grape"></i>
@@ -20,7 +42,7 @@ const Index = () => {
             </div>
             <div className="col-md-12 text-center mt-4 mb-3">
               <img
-                src={require("../assets/image/profile1.png")}
+                src={`${process.env.REACT_APP_BACKEND_URL}/${item.image}`}
                 alt="profile"
                 className="img-fluid rounded-4"
                 width={65}
@@ -28,7 +50,7 @@ const Index = () => {
               />
             </div>
             <div className="col-md-12 text-center">
-              <h5 className="">Wahyu Dalmia</h5>
+              <h5 className="">{item.username}</h5>
             </div>
             <div className="col-md-12 text-center m1">
               <p className="text-muted">@wdalm</p>
@@ -37,7 +59,7 @@ const Index = () => {
               <h6>Account</h6>
             </div>
             <div className="col-md-12 mt-1">
-              <p>+375(29)9638433</p>
+              <p>{item.phone}</p>
             </div>
             <div className="col-md-12 m3">
               <Link className="aDiv">Tap to change phone number</Link>
@@ -49,7 +71,7 @@ const Index = () => {
             </div>
             <hr className="text-muted" />
             <div className="col-md-12 mt-4">
-              <h6>I’m Senior Frontend Developer from Microsoft</h6>
+              <h6>{item.description}</h6>
               <p className="text-muted">Bio</p>
             </div>
             <div className="col-md-12 mt-4">
@@ -97,6 +119,12 @@ const Index = () => {
               <button type="button" className="btn btn-outline-warning"><i className="fa fa-pencil"></i> Edit profile</button></Link>
             </div>
           </div>
+                )
+              })
+            ) : (
+              null
+            )
+          }
           <Chat/>
         </div>
       </div>

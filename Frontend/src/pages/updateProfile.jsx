@@ -71,6 +71,12 @@ const Index = () => {
     // console.log(fileUploaded);
     setImage(fileUploaded);
   };
+
+  const logout = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    navigate("/");
+  }
   return (
     <div>
       <div className="containerProfile">
@@ -250,6 +256,16 @@ const Index = () => {
                           onClick={(e)=> deleteUser(e)}
                         >
                           Delete Profile
+                        </button>
+                      </div>
+                      <div className="col-md-12 mt-2">
+                        <button
+                          type="submit"
+                          className="btn btn-primary"
+                          style={{ width: "100%" }}
+                          onClick={logout}
+                        >
+                          Logout
                         </button>
                       </div>
                     </div>

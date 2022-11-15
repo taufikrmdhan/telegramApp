@@ -19,7 +19,7 @@ const Index = () => {
         localStorage.setItem("token", res.data.token.token);
         localStorage.setItem("user", JSON.stringify(res.data.token.data));
         alert("Login Success");
-        navigate("/chat");
+        navigate("/message");
       })
       .catch((err) => {
         console.log(err);
