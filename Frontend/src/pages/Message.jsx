@@ -92,7 +92,7 @@ const Index = () => {
     <div>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3 bg-white p-3 px-4 displayHidden">
+          <div className="col-md-3 bg-white p-3 px-4">
             <div className="row pb-5 pt-4">
               <div className="col-md-12 d-flex flex-row align-items-center">
                 <div className="btn px-0 flexSide text-start position-relative">
@@ -277,20 +277,23 @@ const Index = () => {
             >
               <div>
                 <Link to="/profile">
-                <img
-                  src={require("../assets/image/profile.png")}
-                  // src={`${process.env.REACT_APP_BACKEND_URL}/${listuser.data[0].image}`}
-                  alt="profile"
-                  className="img-fluid rounded-4"
-                  width={50}
-                  height={50}
-                />
+                  <img
+                    // src={require("../assets/image/profile.png")}
+                    
+                      src={`${process.env.REACT_APP_BACKEND_URL}/${activeReceiver.image}`}
+                    
+                    alt="profile"
+                    className="img-fluid rounded-4"
+                    width={50}
+                    height={50}
+                  />
                 </Link>
-                
               </div>
               <div className="flexSide">
                 <div className="d-flex flex-row">
-                  <h6 className="flexSide">{activeReceiver.username}</h6>
+                  <h6 className="flexSide">{
+                    activeReceiver.username ? activeReceiver.username : "No user"
+                  }</h6>
                   <Link
                     className="btn align-self-center"
                     data-bs-toggle="collapse"
@@ -313,7 +316,11 @@ const Index = () => {
                     className="text-muted flexSide"
                     style={{ marginTop: "-15px" }}
                   >
-                    online
+                    {activeReceiver.username ? (
+                      <small>online</small>
+                    ) : (
+                      <small>offline</small>
+                    )}
                   </small>
                 </div>
                 <div
@@ -355,15 +362,22 @@ const Index = () => {
                       <div className="col-md-8">
                         <div className="row mt-4 maxWidth">
                           <div className="col-md-2 position-relative">
-                            
-                              <img
-                                src={require("../assets/image/profile.png")}
-                                alt="profile"
-                                className="img-fluid rounded-4 position-absolute end-0 translate-end customChatLeft displayHidden"
-                                width={50}
-                                height={50}
-                              />
-                       
+                            <img
+                              // src={require("../assets/image/profile.png")}
+                              src={
+                                listuser.find(
+                                  (user) => user.username == item.sender
+                                ).image
+                                  ? `${process.env.REACT_APP_BACKEND_URL}/${listuser.find(
+                                      (user) => user.username == item.sender
+                                    ).image}`
+                                  : require("../assets/image/profile.png")
+                              }
+                              alt="profile"
+                              className="img-fluid rounded-4 position-absolute end-0 translate-end customChatLeft displayHidden"
+                              width={50}
+                              height={50}
+                            />
                           </div>
                           <div className="col-md-6">
                             <p className="bgGrape text-white rounded-5 p-3">
@@ -374,8 +388,9 @@ const Index = () => {
                             </p>
                           </div>
                           <div className="col-md-2 d-flex align-self-center grape">
-                            {/* <small>{String(item.create_at).slice(0, 5)}</small> */}
-                            <small>{item.create_at}</small>
+                            <small>
+                              {String(item.create_at).slice(11, 16)}
+                            </small>
                           </div>
                         </div>
                       </div>
@@ -391,9 +406,15 @@ const Index = () => {
                               {item.message}
                             </p>
                           </div>
+                          <div className="col-md-2 d-flex align-self-center grape">
+                            <small>
+                              {String(item.create_at).slice(11, 16)}
+                            </small>
+                          </div>
                           <div className="col-md-2 position-relative">
                             <img
-                              src={require("../assets/image/profile1.png")}
+                              // src={require("../assets/image/profile1.png")}
+                              src={`${process.env.REACT_APP_BACKEND_URL}/${activeReceiver.image}`}
                               alt="profile"
                               className="img-fluid rounded-4 position-absolute  translate-end customChatLeft displayHidden"
                               width={50}
