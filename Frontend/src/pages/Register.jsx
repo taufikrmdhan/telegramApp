@@ -1,10 +1,14 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import {useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { createUser } from "../redux/action/user";
 
 const Index = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -23,18 +27,22 @@ const Index = () => {
         email: form.email,
         password: form.password,
       }
-      axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/register`, body)
-      .then((res) => {
-        console.log(res);
-        if (res.data.status === "success") {
-          alert("Register Success");
-          navigate("/");
-        }
-        else {
-          alert("Register Failed");
-        }
-      })
+      // axios
+      // .post(`${process.env.REACT_APP_BACKEND_URL}/register`, body)
+      // .then((res) => {
+      //   console.log(res);
+      //   if (res.data.status === "success") {
+      //     alert("Register Success");
+      //     navigate("/");
+      //   }
+      //   else {
+      //     alert("Register Failed");
+      //   }
+      // })
+      dispatch(createUser(body, () => {
+        navigate("/");
+      }
+      ))
     }
   }
   return (
