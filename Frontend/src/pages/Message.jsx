@@ -21,7 +21,7 @@ const Index = () => {
   const [listChat, setListChat] = useState([]);
 
   useEffect(() => {
-    const socket = io(`http://localhost:3003`);
+    const socket = io(`${process.env.REACT_APP_BACKEND_URL}`);
     socket.on("send-message-response", (response) => {
       const receiver = JSON.parse(localStorage.getItem("receiver"));
 
@@ -65,7 +65,8 @@ const Index = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     setLogin(user);
     axios
-      .get("http://localhost:3003/user/list")
+      // .get("http://localhost:3003/user/list")
+      .get(`${process.env.REACT_APP_BACKEND_URL}/user/list`)
       .then((res) => {
         setListUser(res.data.data);
       })
@@ -128,7 +129,9 @@ const Index = () => {
               <div className="collapse position-relative" id="setting">
                 <div className="bgGrapeSetting rounded-5 p-3 position-absolute top-0 end-0">
                   <div className="col-md-12 my-3">
-                    <i className="fa fa-cog text-white"> Setting</i>
+                    <Link to={"/profile"}>
+                      <i className="fa fa-cog text-white"> Setting</i>
+                    </Link>
                   </div>
                   <div className="col-md-12 my-3">
                     <i className="fa fa-user text-white"> Contacts</i>
@@ -269,236 +272,255 @@ const Index = () => {
               ) : null
             )}
           </div>
-          <div className="col-md-9 bg-white">
-            {/* <div className="col-md-12 px-4 bg-white"> */}
-            <div
-              className="d-flex flex-row align-items-center mt-3 px-3 pb-2"
-              style={{ gap: "10px" }}
-            >
-              <div>
-                <Link to="/profile">
-                  <img
-                    // src={require("../assets/image/profile.png")}
-                    
-                      src={`${process.env.REACT_APP_BACKEND_URL}/${activeReceiver.image}`}
-                    
-                    alt="profile"
-                    className="img-fluid rounded-4"
-                    width={50}
-                    height={50}
-                  />
-                </Link>
-              </div>
-              <div className="flexSide">
-                <div className="d-flex flex-row">
-                  <h6 className="flexSide">{
-                    activeReceiver.username ? activeReceiver.username : "No user"
-                  }</h6>
-                  <Link
-                    className="btn align-self-center"
-                    data-bs-toggle="collapse"
-                    to="#collapseExample2"
-                    role="button"
-                    aria-expanded="false"
-                    aria-controls="collapseExample2"
-                  >
+          {activeReceiver.id_user ? (
+            <div className="col-md-9 bg-white">
+              {/* <div className="col-md-12 px-4 bg-white"> */}
+              <div
+                className="d-flex flex-row align-items-center mt-3 px-3 pb-2"
+                style={{ gap: "10px" }}
+              >
+                <div>
+                  <Link to="/profile">
                     <img
-                      src={require("../assets/image/titik.png")}
+                      // src={require("../assets/image/profile.png")}
+
+                      // src={`${process.env.REACT_APP_BACKEND_URL}/${activeReceiver.image}`}
+                      src={
+                        activeReceiver.image
+                          ? `${process.env.REACT_APP_BACKEND_URL}/${activeReceiver.image}`
+                          : require("../assets/image/profile.png")
+                      }
                       alt="profile"
-                      className="img-fluid rounded-4 align-self-center"
-                      width={20}
-                      height={20}
+                      className="img-fluid rounded-4"
+                      width={50}
+                      height={50}
                     />
                   </Link>
                 </div>
-                <div className="d-flex flex-row">
-                  <small
-                    className="text-muted flexSide"
-                    style={{ marginTop: "-15px" }}
+                <div className="flexSide">
+                  <div className="d-flex flex-row">
+                    <h6 className="flexSide">
+                      {activeReceiver.username
+                        ? activeReceiver.username
+                        : "No user"}
+                    </h6>
+                    <Link
+                      className="btn align-self-center"
+                      data-bs-toggle="collapse"
+                      to="#collapseExample2"
+                      role="button"
+                      aria-expanded="false"
+                      aria-controls="collapseExample2"
+                    >
+                      <img
+                        src={require("../assets/image/titik.png")}
+                        alt="profile"
+                        className="img-fluid rounded-4 align-self-center"
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                  </div>
+                  <div className="d-flex flex-row">
+                    <small
+                      className="text-muted flexSide"
+                      style={{ marginTop: "-15px" }}
+                    >
+                      {activeReceiver.username ? (
+                        <small>online</small>
+                      ) : (
+                        <small>offline</small>
+                      )}
+                    </small>
+                  </div>
+                  <div
+                    className="collapse position-relative"
+                    id="collapseExample2"
                   >
-                    {activeReceiver.username ? (
-                      <small>online</small>
-                    ) : (
-                      <small>offline</small>
-                    )}
-                  </small>
+                    <div className="bgGrapeChat rounded-5 p-3 position-absolute top-0 end-0">
+                      <div className="col-md-12 my-3">
+                        <i className="fa fa-phone text-white"> Call</i>
+                      </div>
+                      <div className="col-md-12 my-3">
+                        <i className="fa fa-trash text-white">
+                          {" "}
+                          Delete chat history
+                        </i>
+                      </div>
+                      <div className="col-md-12 my-3">
+                        <i className="fa fa-bell text-white">
+                          {" "}
+                          Mute notifications
+                        </i>
+                      </div>
+                      <div className="col-md-12 my-3">
+                        <i className="fa fa-search text-white"> Search</i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div
+                className="col-md-12 customColChat bg-light"
+                style={{ overflow: "scroll" }}
+              >
+                {listChat.map((item, index) => (
+                  <div key={index}>
+                    {/* {console.log(item)} */}
+                    {item.sender == login.username ? (
+                      <div className="row">
+                        <div className="col-md-8">
+                          <div className="row mt-4 maxWidth">
+                            <div className="col-md-2 position-relative">
+                              <img
+                                // src={require("../assets/image/profile.png")}
+                                src={
+                                  listuser.find(
+                                    (user) => user.username == item.sender
+                                  ).image
+                                    ? `${process.env.REACT_APP_BACKEND_URL}/${
+                                        listuser.find(
+                                          (user) => user.username == item.sender
+                                        ).image
+                                      }`
+                                    : require("../assets/image/profile.png")
+                                }
+                                alt="profile"
+                                className="img-fluid rounded-4 position-absolute end-0 translate-end customChatLeft displayHidden"
+                                width={50}
+                                height={50}
+                              />
+                            </div>
+                            <div className="col-md-6">
+                              <p className="bgGrape text-white rounded-5 p-3">
+                                {/* Hi, son, how are you doing? Today, my father and I
+                                    went to buy a car, bought a cool car.
+                                     */}
+                                {item.message}
+                              </p>
+                            </div>
+                            <div className="col-md-2 d-flex align-self-center grape">
+                              <small>
+                                {String(item.create_at).slice(11, 16)}
+                              </small>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-md-4"></div>
+                      </div>
+                    ) : (
+                      <div className="row">
+                        <div className="col-md-6"></div>
+                        <div className="col-md-6">
+                          <div className="row mt-4">
+                            <div className="col-md-8">
+                              <p className="bg-white rounded-5 p-3">
+                                {item.message}
+                              </p>
+                            </div>
+                            <div className="col-md-2 d-flex align-self-center grape">
+                              <small>
+                                {String(item.create_at).slice(11, 16)}
+                              </small>
+                            </div>
+                            <div className="col-md-2 position-relative">
+                              <img
+                                // src={require("../assets/image/profile1.png")}
+                                src={`${process.env.REACT_APP_BACKEND_URL}/${activeReceiver.image}`}
+                                alt="profile"
+                                className="img-fluid rounded-4 position-absolute  translate-end customChatLeft displayHidden"
+                                width={50}
+                                height={50}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <div className="input-group mb-3 mt-2 rounded-5 px-4">
+                <form onSubmit={onSubmitMessage} style={{ width: "85%" }}>
+                  <input
+                    onChange={(e) => setMessage(e.target.value)}
+                    type="text"
+                    className="form-control bg-light border-0"
+                    placeholder="Type a message"
+                    aria-label="Recipient's username"
+                    aria-describedby="button-addon2"
+                  />
+                </form>
+                <Link
+                  className="btn btn-outline-secondary bg-light border-0"
+                  data-bs-toggle="collapse"
+                  to="#collapseExample3"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseExample3"
+                >
+                  <i className="fa fa-plus grape"></i>
+                </Link>
                 <div
                   className="collapse position-relative"
-                  id="collapseExample2"
+                  id="collapseExample3"
                 >
-                  <div className="bgGrapeChat rounded-5 p-3 position-absolute top-0 end-0">
-                    <div className="col-md-12 my-3">
-                      <i className="fa fa-phone text-white"> Call</i>
+                  <div className="bgGrapeChat2 rounded-5 p-3 position-absolute top-0 end-0">
+                    <div className="col-md-12 my-3 mx-2">
+                      <i className="fa fa-picture-o text-white"> Image</i>
                     </div>
-                    <div className="col-md-12 my-3">
-                      <i className="fa fa-trash text-white">
-                        {" "}
-                        Delete chat history
-                      </i>
+                    <div className="col-md-12 my-3 mx-2">
+                      <i className="fa fa-file text-white"> Documents</i>
                     </div>
-                    <div className="col-md-12 my-3">
-                      <i className="fa fa-bell text-white">
-                        {" "}
-                        Mute notifications
-                      </i>
+                    <div className="col-md-12 my-3 mx-2">
+                      <i className="fa fa-address-book text-white"> Contacts</i>
                     </div>
-                    <div className="col-md-12 my-3">
-                      <i className="fa fa-search text-white"> Search</i>
+                    <div className="col-md-12 my-3 mx-2">
+                      <i className="fa fa-map-marker text-white"> Location</i>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div
-              className="col-md-12 customColChat bg-light"
-              style={{ overflow: "scroll" }}
-            >
-              {listChat.map((item, index) => (
-                <div key={index}>
-                  {/* {console.log(item)} */}
-                  {item.sender == login.username ? (
-                    <div className="row">
-                      <div className="col-md-8">
-                        <div className="row mt-4 maxWidth">
-                          <div className="col-md-2 position-relative">
-                            <img
-                              // src={require("../assets/image/profile.png")}
-                              src={
-                                listuser.find(
-                                  (user) => user.username == item.sender
-                                ).image
-                                  ? `${process.env.REACT_APP_BACKEND_URL}/${listuser.find(
-                                      (user) => user.username == item.sender
-                                    ).image}`
-                                  : require("../assets/image/profile.png")
-                              }
-                              alt="profile"
-                              className="img-fluid rounded-4 position-absolute end-0 translate-end customChatLeft displayHidden"
-                              width={50}
-                              height={50}
-                            />
-                          </div>
-                          <div className="col-md-6">
-                            <p className="bgGrape text-white rounded-5 p-3">
-                              {/* Hi, son, how are you doing? Today, my father and I
-                                  went to buy a car, bought a cool car.
-                                   */}
-                              {item.message}
-                            </p>
-                          </div>
-                          <div className="col-md-2 d-flex align-self-center grape">
-                            <small>
-                              {String(item.create_at).slice(11, 16)}
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-md-4"></div>
-                    </div>
-                  ) : (
-                    <div className="row">
-                      <div className="col-md-6"></div>
-                      <div className="col-md-6">
-                        <div className="row mt-4">
-                          <div className="col-md-8">
-                            <p className="bg-white rounded-5 p-3">
-                              {item.message}
-                            </p>
-                          </div>
-                          <div className="col-md-2 d-flex align-self-center grape">
-                            <small>
-                              {String(item.create_at).slice(11, 16)}
-                            </small>
-                          </div>
-                          <div className="col-md-2 position-relative">
-                            <img
-                              // src={require("../assets/image/profile1.png")}
-                              src={`${process.env.REACT_APP_BACKEND_URL}/${activeReceiver.image}`}
-                              alt="profile"
-                              className="img-fluid rounded-4 position-absolute  translate-end customChatLeft displayHidden"
-                              width={50}
-                              height={50}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="input-group mb-3 mt-2 rounded-5 px-4">
-              <form onSubmit={onSubmitMessage} style={{ width: "85%" }}>
-                <input
-                  onChange={(e) => setMessage(e.target.value)}
-                  type="text"
-                  className="form-control bg-light border-0"
-                  placeholder="Type a message"
-                  aria-label="Recipient's username"
-                  aria-describedby="button-addon2"
-                />
-              </form>
-              <Link
-                className="btn btn-outline-secondary bg-light border-0"
-                data-bs-toggle="collapse"
-                to="#collapseExample3"
-                role="button"
-                aria-expanded="false"
-                aria-controls="collapseExample3"
-              >
-                <i className="fa fa-plus grape"></i>
-              </Link>
-              <div className="collapse position-relative" id="collapseExample3">
-                <div className="bgGrapeChat2 rounded-5 p-3 position-absolute top-0 end-0">
-                  <div className="col-md-12 my-3 mx-2">
-                    <i className="fa fa-picture-o text-white"> Image</i>
-                  </div>
-                  <div className="col-md-12 my-3 mx-2">
-                    <i className="fa fa-file text-white"> Documents</i>
-                  </div>
-                  <div className="col-md-12 my-3 mx-2">
-                    <i className="fa fa-address-book text-white"> Contacts</i>
-                  </div>
-                  <div className="col-md-12 my-3 mx-2">
-                    <i className="fa fa-map-marker text-white"> Location</i>
-                  </div>
-                </div>
-              </div>
-              <button
-                className="btn btn-outline-secondary bg-light border-0"
-                type="button"
-                id="button-addon2"
-              >
-                <i className="fa fa-smile-o grape"></i>
-              </button>
-              <div>
                 <button
                   className="btn btn-outline-secondary bg-light border-0"
                   type="button"
                   id="button-addon2"
-                  onClick={handleClick}
                 >
-                  <i className="fa fa-upload grape"></i>
+                  <i className="fa fa-smile-o grape"></i>
                 </button>
-                <input
-                  type="file"
-                  ref={hiddenFileInput}
-                  id="formFile"
-                  name="image"
-                  onChange={(e) => handleChange(e)}
-                  style={{ display: "none" }}
-                />
+                <div>
+                  <button
+                    className="btn btn-outline-secondary bg-light border-0"
+                    type="button"
+                    id="button-addon2"
+                    onClick={handleClick}
+                  >
+                    <i className="fa fa-upload grape"></i>
+                  </button>
+                  <input
+                    type="file"
+                    ref={hiddenFileInput}
+                    id="formFile"
+                    name="image"
+                    onChange={(e) => handleChange(e)}
+                    style={{ display: "none" }}
+                  />
+                </div>
+                <button
+                  className="btn btn-outline-secondary bg-light border-0"
+                  type="button"
+                  id="button-addon2"
+                >
+                  <i className="fa fa-paper-plane grape"></i>
+                </button>
               </div>
-              <button
-                className="btn btn-outline-secondary bg-light border-0"
-                type="button"
-                id="button-addon2"
-              >
-                <i className="fa fa-paper-plane grape"></i>
-              </button>
             </div>
-          </div>
+          ) : (
+            <div className="col-md-9 customSplash bg-light displayHidden">
+              <h6 className="custSelectCenter">
+                Please select a chat to start messaging
+              </h6>
+            </div>
+          )}
         </div>
       </div>
     </div>
