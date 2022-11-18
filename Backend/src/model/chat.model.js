@@ -36,10 +36,29 @@ module.exports = {
       );
     });
   },
-  deleteChat: (id_chat) => {
+  // deleteChat: (id_chat) => {
+  //   return new Promise((resolve, reject) => {
+  //     db.query(
+  //       `DELETE FROM chats WHERE id_chat=${id_chat}`,
+  //       (err, res) => {
+  //         if (err) {
+  //           reject(err);
+  //         }
+  //         resolve(res);
+  //       }
+  //     );
+  //   });
+  // },
+  getChat: (id_user) => {
     return new Promise((resolve, reject) => {
       db.query(
-        `DELETE FROM chats WHERE id_chat=${id_chat}`,
+        `SELECT DISTINCT ON (involved)
+        involved as userid,
+        u.username as username,
+        message,
+        create_at FROM (SELECT c.*, case sender when ${id_user} then receiver else sender end
+        as involved from chats c where c.sender = ${id_user} or c.receiver = ${id_user})
+        s join users u on s.involved = u.id_user order by involved, s.create_at desc`,
         (err, res) => {
           if (err) {
             reject(err);
@@ -48,5 +67,5 @@ module.exports = {
         }
       );
     });
-  }
+  },
 };

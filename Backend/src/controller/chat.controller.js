@@ -14,5 +14,16 @@ module.exports = {
         } catch (err) {
             failed(res, err.message, "failed", "internal server error");
         }
+    },
+
+    // get chat promise
+    getChat: async (req, res) => {
+        try {
+            const { id_user } = req.params;
+            const result = await chatModel.getChat(id_user);
+            success(res, result.rows, "success", "get chat");
+        } catch (err) {
+            failed(res, err.message, "failed", "internal server error");
+        }
     }
 }

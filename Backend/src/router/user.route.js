@@ -8,7 +8,7 @@ const {
   updateUser,
   deleteUser,
 } = require("../controller/user.controller");
-const {deleteChat} = require("../controller/chat.controller");
+const {deleteChat, getChat} = require("../controller/chat.controller");
 const { upload } = require("../middleware/uploadImg");
 const { removeProfile } = require("../middleware/deleteImg");
 const jwtAuth = require("../middleware/jwtAuth");
@@ -27,6 +27,8 @@ router
 
   .put("/user/update/:id_user", removeProfile, upload, updateUser)
   .delete("/user/delete/:id_user", removeProfile, deleteUser)
-  .delete("/chat/delete/:id_chat", deleteChat);
+  .delete("/chat/delete/:id_chat", deleteChat)
+  
+  .get("/chat/list/:id_user", getChat);
 
 module.exports = router;
