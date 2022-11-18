@@ -172,3 +172,14 @@
 .maxWidth{
     width: 90%;
 }
+
+.customNewAdd{
+    border: dashed 2px #7E98DF;
+    border-radius: 10px;
+}
+
+.customAdd{
+    border: solid 1px red;
+    border-radius: 10px;
+    margin-top: 15px;
+}

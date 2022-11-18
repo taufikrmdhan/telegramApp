@@ -20,6 +20,27 @@ const Index = () => {
   const [socketio, setSocketIo] = useState(null);
   const [listChat, setListChat] = useState([]);
 
+
+  const [pesan, setPesan] = useState([]);
+
+  // get pesan by id user
+  useEffect((id_user) => {
+
+    
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/chat/list/${id_user}`)
+
+      .then((res) => {
+        console.log(res);
+        console.log(id_user)
+        setPesan(res.data.data);
+      })
+      .catch((err) => {
+        console.log("error get data");
+        console.log(err);
+      });
+  }, []);
+
   useEffect(() => {
     const socket = io(`${process.env.REACT_APP_BACKEND_URL}`);
     socket.on("send-message-response", (response) => {
@@ -237,15 +258,27 @@ const Index = () => {
                           </div>
                           <div className="d-flex flex-row">
                             <small className="text-muted flexSide">
-                              hello, how are you?
+                              {/* get item message index terakhir */}
+                              {
+                                activeReceiver.id_user === item.id_user
+                                  ? "active"
+                                  : "Get message"
+                              }
                             </small>
-                            {item.number ? (
+                            {item.id_user === activeReceiver.id_user ? (
+                                <i className="fa fa-check"></i>
+                              ) : (
+                                <small className="rounded-circle bgGrape text-white px-2">
+                                1
+                              </small>
+                              )}
+                            {/* {item.number ? (
                               <small className="rounded-circle bgGrape text-white px-2">
                                 {item.number}
                               </small>
                             ) : (
                               <i className="fa fa-check"></i>
-                            )}
+                            )} */}
                             {/* <i className="fa fa-check"></i> */}
                           </div>
                         </div>
