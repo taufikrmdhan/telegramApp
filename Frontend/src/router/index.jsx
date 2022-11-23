@@ -10,7 +10,6 @@ import Chat from "../pages/Chatlist";
 import Message from "../pages/Message";
 import Contact from "../pages/Contactinfo";
 import Update from "../pages/updateProfile";
-// import Profiles from "../pages/profiles";
 // import Chat from "../pages/Chat";
 
 const PrivateRoute = () => {
@@ -30,7 +29,6 @@ const Router = () => {
         <Route index element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="splash" element={<Splash />} />
-        {/* <Route path="profiles" element={<Profiles />} /> */}
         
         <Route path="message" element={<PrivateRoute />}>
           <Route index element={<Message />} />
