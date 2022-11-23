@@ -1,1 +1,3 @@
 # telegramApp
+
+Telegram adalah sebuah aplikasi chat realtime yang dikembangkan menggunakan beberapa teknologi diantaranya : PostgreSQL, Express.js, Web Socket, dan React.js. Pada aplikasi ini, user bisa register dan login untuk masuk ke halaman chat telegram. Pertama login , nanti akan langsung masuk ke menu chat, yang dimana melalui menu chat ini kita bisa memilih user mana yang akan kita chat. Melalui fitur ini, kita bisa chat secara realtime dengan orang lain yang sama-sama menggunakana app ini. Untuk melakukan CRUD profile, kita bisa klik icon setting, lalu nanti akan langsung masuk ke halaman profile. Setelah itu pilih button edit profile untuk melakukan proses CRUD profile.
