@@ -10,7 +10,7 @@
 
 
 ## Description
-Telegram adalah sebuah aplikasi chat realtime yang dikembangkan menggunakan beberapa teknologi diantaranya : PostgreSQL, Express.js, Web Socket, dan React.js. Pada aplikasi ini, user bisa register dan login untuk masuk ke halaman chat telegram. Pertama login , nanti akan langsung masuk ke menu chat, yang dimana melalui menu chat ini kita bisa memilih user mana yang akan kita chat. Melalui fitur ini, kita bisa chat secara realtime dengan orang lain yang sama-sama menggunakana app ini. Untuk melakukan CRUD profile, kita bisa klik icon setting, lalu nanti akan langsung masuk ke halaman profile. Setelah itu pilih button edit profile untuk melakukan proses CRUD profile.
+Telegram is a real-time chat application developed using several technologies including: PostgreSQL, Express.js, Web Sockets, and React.js. In this application, users can register and login to enter the Telegram chat page. First log in, then you will immediately enter the chat menu, where through this chat menu we can choose which user we will chat with. Through this feature, we can chat in real time with other people who both use this application. To do a CRUD profile, we can click the settings icon, then we will immediately go to the profile page. After that select the edit profile button to perform the CRUD profile process.
 
 ## Project Structure
 
