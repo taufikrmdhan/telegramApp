@@ -33,35 +33,35 @@ Telegram adalah sebuah aplikasi chat realtime yang dikembangkan menggunakan bebe
   <summary>
     Before Start Chat
   </summary>
-<img src="/Frontend/ss/chatBefore.png" alt="before chat" />
+<img src="/Frontend/ss/chatBefore revisi.png" alt="before chat" />
 </details>
 
 <details>
   <summary>
     Page user chat 1
   </summary>
-<img src="/Frontend/ss/lamanChat.png" alt="Laman chat" />
+<img src="/Frontend/ss/lamanChat revisi.png" alt="Laman chat" />
 </details>
 
 <details>
   <summary>
     Page user chat 2
   </summary>
-<img src="/Frontend/ss/lamanChat2.png" alt="Laman chat" />
+<img src="/Frontend/ss/lamanChat2 revisi.png" alt="Laman chat" />
 </details>
 
 <details>
   <summary>
     Profile page 1
   </summary>
-<img src="/Frontend/ss/profileGet.png" alt="profile Page" />
+<img src="/Frontend/ss/profile get revisi.png" alt="profile Page" />
 </details>
 
 <details>
   <summary>
     Profile page 2
   </summary>
-<img src="/Frontend/ss/profile.png" alt="profile Page" />
+<img src="/Frontend/ss/profile revisi.png" alt="profile Page" />
 </details>
 
 <details>
