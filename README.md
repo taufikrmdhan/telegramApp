@@ -82,6 +82,8 @@ Telegram is a real-time chat application developed using several technologies in
 ## Related Project
 RESTful API for this web application, clone this for development Telegram template.\
 [backend-slicingtelegramtemplate](https://github.com/taufikrmdhan/backend_chatTelegram)
+<br/>
+[deployement-telegramApp](https://telegram-app-pi.vercel.app/)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
