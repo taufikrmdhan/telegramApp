@@ -3,6 +3,7 @@
 ## Table of contents
 - [Description](#Description)
 - [Project Structure](#Project)
+- [Build With](#Build)
 - [Screenshoots](#Screenshoot)
 - [Related Project](#Related-Project)
 - [Contributing](#Contributing)
@@ -27,6 +28,19 @@ Telegram is a real-time chat application developed using several technologies in
    |── .gitignore      # File name for not uploaded on github
    |── .README.md      # For Readme In github
 ```
+
+## Build With
+
+<ul id="Build" dir="auto">
+  <li><a href="https://html5.org/" rel="nofollow">HTML 5: for markup language</a></li>
+  <li><a href="https://www.w3.org/Style/CSS/Overview.en.html" rel="nofollow">CSS: for styling website display</a></li>
+  <li><a href="https://nodejs.org/en/" rel="nofollow">NodeJS: for main language set dynamic website application</a></li>
+  <li><a href="https://reactjs.org/" rel="nofollow">React JS: for library from node to create powerfull website application</a></li>
+  <li><a href="https://html5.org/" rel="nofollow">Bootstrap: a library framework of CSS/HTML/JS </a></li>
+  <li><a href="https://html5.org/" rel="nofollow">Axios: dependency for fetching data from API</a></li>
+  <li><a href="https://github.com/taufikrmdhan/telegramApp/blob/main/Frontend/package.json">and se more for dependecy on package.json</a></li>
+</ul>
+
 
 ## Screenshoots
 <details>
