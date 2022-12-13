@@ -41,6 +41,7 @@ const Index = () => {
       // })
       dispatch(createUser(body, () => {
         navigate("/");
+        alert("Register Success");
       }
       ))
     }

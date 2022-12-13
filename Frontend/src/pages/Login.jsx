@@ -14,7 +14,7 @@ const Index = () => {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/login`, form)
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         localStorage.setItem("token", res.data.token.token);
         localStorage.setItem("user", JSON.stringify(res.data.token.data));
         alert("Login Success");
