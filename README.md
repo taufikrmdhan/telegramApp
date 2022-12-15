@@ -80,6 +80,13 @@ Telegram is a real-time chat application developed using several technologies in
 
 <details>
   <summary>
+    Contact Info
+  </summary>
+<img src="/Frontend/ss/contactInfo.png" alt="contact Page" />
+</details>
+
+<details>
+  <summary>
     Login Page
   </summary>
 <img src="/Frontend/ss/login.png" alt="login" />
@@ -90,6 +97,13 @@ Telegram is a real-time chat application developed using several technologies in
    Register
   </summary>
 <img src="/Frontend/ss/register.png" alt="Register" />
+</details>
+
+<details>
+  <summary>
+    Splash Load
+  </summary>
+<img src="/Frontend/ss/splash.png" alt="loading page" />
 </details>
 
 
