@@ -10,10 +10,10 @@
 - [License](#License)
 
 
-## Description
+<h2 id="Description">Description</h2> 
 Telegram is a real-time chat application developed using several technologies including: PostgreSQL, Express.js, Web Sockets, and React.js. In this application, users can register and login to enter the Telegram chat page. First log in, then you will immediately enter the chat menu, where through this chat menu we can choose which user we will chat with. Through this feature, we can chat in real time with other people who both use this application. To do a CRUD profile, we can click the settings icon, then we will immediately go to the profile page. After that select the edit profile button to perform the CRUD profile process.
 
-## Project Structure
+<h2 id="Project">Project Structure</h2> 
 
 ```
 |── Frontend
@@ -29,7 +29,7 @@ Telegram is a real-time chat application developed using several technologies in
    |── .README.md      # For Readme In github
 ```
 
-## Build With
+<h2 id=" Build">Build With</h2> 
 
 <ul id="Build" dir="auto">
   <li><a href="https://html5.org/" rel="nofollow">HTML 5: for markup language</a></li>
@@ -42,7 +42,7 @@ Telegram is a real-time chat application developed using several technologies in
 </ul>
 
 
-## Screenshoots
+<h2 id="Screenshoot">Screenshoots</h2> 
 <details>
   <summary>
     Before Start Chat
@@ -107,18 +107,18 @@ Telegram is a real-time chat application developed using several technologies in
 </details>
 
 
-## Related Project
+<h2 id="Related-Project">Related Project</h2> 
 RESTful API for this web application, clone this for development Telegram template.\
 [backend-slicingtelegramtemplate](https://github.com/taufikrmdhan/backend_chatTelegram)
 <br/>
 [deployement-telegramApp](https://telegram-app-pi.vercel.app/)
 
-## Contributing
+<h2 id="Contributing">Contributing</h2> 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## Run Project
+<h2 id="">Run Project</h2> 
 Install package : npm i
 
 Run Project : npm start
