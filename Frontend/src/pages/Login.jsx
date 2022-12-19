@@ -21,6 +21,7 @@ const Index = () => {
         navigate("/message");
       })
       .catch((err) => {
+        alert("Email or Password is wrong")
         console.log(err);
       });
   }

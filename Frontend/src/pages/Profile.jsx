@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Chat from "../Component/chat";
 import axios from "axios";
 // import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
 
   const data = JSON.parse(localStorage.getItem("user"));
@@ -23,6 +24,11 @@ const Index = () => {
         // console.log(err);
       });
   }, []);
+
+  const handleBack = (e) => {
+    e.preventDefault();
+    navigate("/message");
+  }
   return (
     <div>
       <div className="containerProfile">
@@ -34,7 +40,13 @@ const Index = () => {
                   <div className="col-md-3 bg-white py-4 px-5">
             <div className="row mt-2">
               <div className="col-md-1 text-start ml1">
+                <button
+                style={{border: "none", background: "none"}}
+                type="submit"
+                onClick={(e) => handleBack(e)}
+                >
                 <i className="fa fa-angle-left grape"></i>
+                </button>
               </div>
               <div className="col-md-11 text-center grape">
                 <h5>@wdalm</h5>
